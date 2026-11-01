@@ -1,0 +1,51 @@
+{
+  "about": [
+    "I am currently pursuing a Bachelor's Degree in Software Engineering at the Singapore Institute of Technology (SIT), with professional experience in software development spanning game development, web and mobile applications, AI, and automation.",
+    "My journey began in game development, where I gained extensive experience working with Unity, C#, and 3D development tools. Over the years, I have developed and published multiple single-player and multiplayer games on the Google Play Store, gaining valuable experience in software architecture, debugging, performance optimization, and delivering complete applications.",
+    "As I broaden my focus into software engineering, I have expanded my technical expertise to include Python, Java, JavaScript, React, Flask, SQL, and other modern development tools and frameworks. As an SIT Scholar and an international hackathon winner, I strive to challenge myself, adapt to new technologies, and continuously improve as a developer.",
+    "I am particularly interested in opportunities involving <strong>software engineering, full-stack development, AI, and automation</strong>."
+  ],
+  "experience": [
+    { "title": "Research Assistant", "org": "Singapore Institute of Technology", "start": "Oct 2026", "end": "Present",
+      "description": "Leading an independent research project under Prof Pai Chet on whether AI-generated objects inserted into real photographs can be detected object by object. The work targets a <strong>CVPR 2027</strong> submission.",
+      "tags": ["AI", "Object Detection"] },
+    { "title": "Teaching Assistant", "org": "Singapore Institute of Technology", "start": "Sep 2026", "end": "Oct 2026",
+      "description": "Teaching assistant for the Embedded Systems (IoT) module.",
+      "tags": ["Embedded Systems", "IoT", "Raspberry Pi", "Teaching"] },
+    { "title": "Freelance Software Engineer", "org": "Self-Employed", "start": "Oct 2019", "end": "Present",
+      "description": "Remote freelance work delivering mobile applications, web development and game development projects.",
+      "tags": ["Mobile Apps", "Web Development", "Game Development"] },
+    { "title": "Game Developer", "org": "Weike Gaming Technology", "start": "Dec 2023", "end": "Aug 2024",
+      "description": "Developed and maintained multiple slot games, ensuring seamless gameplay and engaging user experiences. Wrote detailed documentation, troubleshot and fixed bugs, collaborated with cross-functional teams, and played a key role in continuous improvement of game features and performance.",
+      "tags": ["C#", "Bugzilla"] },
+    { "title": "National Service", "org": "Republic of Singapore Air Force", "start": "Aug 2021", "end": "Nov 2023",
+      "description": "Developed and launched a multiplayer mobile game to enhance the training experience for NSF personnel, using gamification to make learning more engaging and effective.",
+      "tags": ["Unity", "Photon", "Photoshop"] },
+    { "title": "Warehouse Assistant", "org": "Lazada (Part-time)", "start": "Sep 2019", "end": "Mar 2020",
+      "description": "Picking, packing and manifesting items, and inventory stock takes.",
+      "tags": ["Excel", "VLOOKUP"] },
+    { "title": "IT Desktop Support", "org": "Diebold Nixdorf (Part-time)", "start": "Aug 2018", "end": "Oct 2018",
+      "description": "Provided end-user IT support, computer and peripheral inventory, mapped network drives via command line, set up Avaya phones and Cisco VPN, and did network point inventory ahead of a network migration.",
+      "tags": [] }
+  ],
+  "education": [
+    { "title": "B.Eng, Computer Software Engineering", "org": "Singapore Institute of Technology", "start": "Sep 2024", "end": "Sep 2028",
+      "description": "SIT Scholar · Student Ambassador.",
+      "tags": ["Docker", "Flask", "React Native"] },
+    { "title": "Diploma, Game Development &amp; Design", "org": "Temasek Polytechnic", "start": "2018", "end": "2021",
+      "description": "GPA 3.7 · Certificate with Merit. Programming in C# and Unity, 3D modelling in Maya, texturing in Substance Painter and Photoshop, Android apps (Java) and web apps (HTML, JavaScript, CSS). Published my own games using the skills learned.",
+      "tags": [] },
+    { "title": "O Level", "org": "Holy Innocents' High School", "start": "2013", "end": "2017",
+      "description": "", "tags": [] }
+  ],
+  "certifications": [
+    { "name": "LTA Transport Future Game Design Hackathon", "issuer": "Land Transport Authority", "date": "Jul 2026" },
+    { "name": "BrainHack 2026 TIL-AI", "issuer": "DSTA", "date": "Jun 2026" },
+    { "name": "Workato Automation Pro 1 · 2 · 3", "issuer": "Workato", "date": "Dec 2024" },
+    { "name": "Master Git and GitHub", "issuer": "Udemy", "date": "Jan 2024" },
+    { "name": "Excel VLOOKUP for Beginners", "issuer": "Udemy", "date": "Nov 2023" },
+    { "name": "Multiplayer AR Game with Unity", "issuer": "Udemy", "date": "Apr 2020" },
+    { "name": "Service Culture", "issuer": "Gnowbe", "date": "Jun 2020" },
+    { "name": "Power-Packed Oral Presentations", "issuer": "Gnowbe", "date": "Jun 2020" }
+  ]
+}
