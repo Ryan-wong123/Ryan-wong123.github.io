@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=5">
+  <link rel="stylesheet" href="style.css?v=6">
   <script type="importmap">
   { "imports": {
     "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
@@ -188,6 +188,7 @@
 
     <section id="skills" class="reveal">
       <h3><small>04</small> Skills</h3>
+      <button class="filterbar" id="filterbar" hidden></button>
       <div class="globe" id="globe" aria-hidden="true"></div>
       <div class="skillgrid">
         <div class="glass"><h4>Languages</h4><div class="tags big"><span>C#</span><span>Python</span><span>Java</span><span>JavaScript</span><span>SQL</span><span>HTML/CSS</span></div></div>
@@ -241,18 +242,35 @@
       <div class="glass contact">
         <h3>Let's build something</h3>
         <p>I'm open to software engineering, full-stack, AI and automation opportunities in Singapore.</p>
+        <div class="bizcard" id="bizcard" aria-hidden="true">
+          <div class="biz-top"><b>Ryan Wong</b><span>Software Engineer</span></div>
+          <div class="biz-bottom"><span>wong.ryan5091@gmail.com</span><span>github.com/Ryan-wong123</span><span>Singapore</span></div>
+        </div>
         <div class="cta">
           <a class="btn" href="https://www.linkedin.com/in/ryan-wong-ke/" target="_blank" rel="noopener">Message me on LinkedIn</a>
           <a class="btn ghost" href="mailto:wong.ryan5091@gmail.com">Email me</a>
           <a class="btn ghost" href="https://github.com/Ryan-wong123" target="_blank" rel="noopener">GitHub ↗</a>
         </div>
+        <div class="game">
+          <canvas id="breakout" tabindex="0" aria-label="Breakout mini-game: move your mouse to steer, click to launch"></canvas>
+          <p class="game-hint">Breakout: move your mouse or finger to steer, click to launch. Arrow keys work too.</p>
+        </div>
       </div>
     </section>
   </main>
 
+  <div class="detail" id="detail" hidden>
+    <div class="detail-sheet" role="dialog" aria-modal="true" aria-label="Project details">
+      <button class="detail-close" aria-label="Close">✕</button>
+      <div class="detail-body"></div>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+
   <footer>© <span id="year"></span> Ryan Wong · Singapore</footer>
   <script src="script.js?v=5"></script>
-  <script type="module" src="scene.js?v=7"></script>
+  <script src="interactive.js?v=2" defer></script>
+  <script type="module" src="scene.js?v=9"></script>
   <script type="module" src="previews.js?v=4"></script>
 </body>
 </html>
