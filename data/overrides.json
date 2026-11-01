@@ -1,0 +1,7 @@
+{
+  "_comment": "Things the LinkedIn sync must never touch. Case-insensitive substring matches.",
+  "ignoreCertifications": ["workato"],
+  "ignoreExperience": [],
+  "ignoreEducation": [],
+  "ignoreProjects": []
+}
