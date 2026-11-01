@@ -223,9 +223,8 @@ function init() {
     return out.copy(camera.position).addScaledVector(dir, 6);
   };
 
-  addEventListener('pointerdown', e => {
+  function burstFrom(ndc) {
     if (reduce) return;
-    const ndc = { x: (e.clientX / innerWidth) * 2 - 1, y: -((e.clientY / innerHeight) * 2 - 1) };
     const origin = pointerWorld(new THREE.Vector3(), ndc);
     right.setFromMatrixColumn(camera.matrixWorld, 0);
     up.setFromMatrixColumn(camera.matrixWorld, 1);
@@ -249,7 +248,21 @@ function init() {
     const pts = new THREE.Points(geo, mat);
     scene.add(pts);
     bursts.push({ pts, geo, mat, attr, vel, age: 0 });
+  }
+
+  addEventListener('pointerdown', e => {
+    burstFrom({ x: (e.clientX / innerWidth) * 2 - 1, y: -((e.clientY / innerHeight) * 2 - 1) });
   }, { passive: true });
+  // the cheat code sends a volley of bursts across the screen
+  addEventListener('scene:celebrate', () => {
+    for (let i = 0; i < 14; i++) {
+      setTimeout(() => burstFrom({ x: Math.random() * 2 - 1, y: Math.random() * 2 - 1 }), i * 90);
+    }
+  });
+
+  // the timeline can steer the camera to a point on the path (null = follow scroll)
+  let focusU = null;
+  addEventListener('scene:focus', e => { focusU = e.detail; });
 
   // particles near the pointer (in screen space) are pushed outward and spring back
   const pushDust = (ndc, amount) => {
@@ -335,7 +348,8 @@ function init() {
   let last = 0;
 
   function update(t, dt) {
-    s += (progress() - s) * (reduce ? 1 : 0.08);
+    const target = focusU ?? progress();
+    s += (target - s) * (reduce ? 1 : 0.08);
     const base = path.getPoint(s);
     const ahead = path.getPoint(Math.min(1, s + 0.02));
 
