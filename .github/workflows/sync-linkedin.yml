@@ -31,12 +31,14 @@ jobs:
           LINKEDIN_URL: ${{ vars.LINKEDIN_URL || 'https://www.linkedin.com/in/ryan-wong-ke/' }}
           APIFY_ACTOR: ${{ vars.APIFY_ACTOR }}
           SUMMARY_FILE: ${{ runner.temp }}/summary.md
+          NOTES_FILE: ${{ runner.temp }}/notes.md
         run: node scripts/sync-linkedin.js
 
       - name: Rebuild index.html
         run: node scripts/build.js
 
       - name: Open pull request if anything changed
+        id: cpr
         uses: peter-evans/create-pull-request@v7
         with:
           branch: linkedin-sync
@@ -49,6 +51,28 @@ jobs:
           add-paths: |
             data/profile.json
             index.html
+
+      # Projects/skills are report-only. If they're the only news there is no PR to carry
+      # them, so keep a single open issue up to date instead.
+      - name: Report LinkedIn items missing from the site
+        if: steps.cpr.outputs.pull-request-number == ''
+        uses: actions/github-script@v7
+        env:
+          NOTES_FILE: ${{ runner.temp }}/notes.md
+        with:
+          script: |
+            const fs = require('fs');
+            const notes = fs.existsSync(process.env.NOTES_FILE) ? fs.readFileSync(process.env.NOTES_FILE, 'utf8').trim() : '';
+            const title = 'LinkedIn items not on the site';
+            const open = (await github.paginate(github.rest.issues.listForRepo, { ...context.repo, state: 'open' }))
+              .find(i => i.title === title && !i.pull_request);
+            if (!notes) {
+              if (open) await github.rest.issues.update({ ...context.repo, issue_number: open.number, state: 'closed' });
+              return;
+            }
+            const body = notes + '\n\n_Report only: the sync never edits projects or skills. Updated by the monthly LinkedIn sync._';
+            if (open) await github.rest.issues.update({ ...context.repo, issue_number: open.number, body });
+            else await github.rest.issues.create({ ...context.repo, title, body });
 
       # A silent failure means the site quietly goes stale, so surface it.
       - name: Open an issue if the sync failed

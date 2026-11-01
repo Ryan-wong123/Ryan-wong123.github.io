@@ -1,0 +1,4 @@
+{
+  "_comment": "Projects that already have a card on the site. Matched by case-insensitive substring against LinkedIn project names.",
+  "projects": ["Future Mobility Planner", "AI Object Detection Research", "Tank IO", "Robot Fighter", "RXXX", "ElementalIO", "Polytopia"]
+}
