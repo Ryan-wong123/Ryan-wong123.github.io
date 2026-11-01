@@ -32,8 +32,9 @@ A monthly GitHub Action (`.github/workflows/sync-linkedin.yml`) pulls your Linke
 
 ### What is and isn't synced
 - Synced from LinkedIn: about, experience, education, certifications (certs are add/update only, never deleted).
-- Kept by hand: tags on entries (preserved across syncs), projects, skills, hero, contact. Skills on LinkedIn
-  that aren't on the site are listed in the PR body.
+- Kept by hand: tags on entries (preserved across syncs), projects, skills, hero, contact. Skills and projects on LinkedIn
+  that aren't on the site are **reported only** (in the PR body, or in a "LinkedIn items not on the site" issue when
+  there's no PR). Add them by hand, and list new projects in `data/projects-known.json`.
 - `data/overrides.json` lists LinkedIn entries to ignore (e.g. the three Workato certs merged into one card).
 - Safety nets: the job aborts if the scrape returns far fewer entries than the site has, and opens an
   issue if a run fails.

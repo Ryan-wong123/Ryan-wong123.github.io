@@ -6,6 +6,7 @@
 //   APIFY_ACTOR      actor id, default dev_fusion~linkedin-profile-scraper
 //   LINKEDIN_FIXTURE path to a saved actor response (offline testing)
 //   SUMMARY_FILE     where to write a markdown change summary (for the PR body)
+//   NOTES_FILE       where to write report-only notes (projects/skills not on the site)
 import fs from 'node:fs';
 
 const root = new URL('../', import.meta.url);
@@ -91,10 +92,15 @@ function normalise(raw) {
     issuer: esc(pick(c, 'subtitle', 'authority', 'issuer', 'issuedBy')),
     date: fmtDate(pick(c, 'issuedAt', 'issueDate', 'date', 'issued')).replace(/^Issued\s*/i, ''),
   }));
+  const projects = (pick(p, 'projects') || []).map(x => ({
+    name: String(pick(x, 'title', 'name') ?? '').trim(),
+    date: fmtDate(pick(x, 'startDate', 'start', 'date') ?? (pick(x, 'period') || {}).startedOn),
+    url: pick(x, 'url', 'link') || '',
+  })).filter(x => x.name);
   const aboutRaw = pick(p, 'about', 'summary');
   const about = aboutRaw ? String(aboutRaw).split(/\n\s*\n/).map(s => text(s.trim())).filter(Boolean) : [];
   return { about, experience: exp.filter(e => e.title && e.org), education: edu.filter(e => e.org),
-           certifications: certs.filter(c => c.name), skills: (pick(p, 'skills') || []).map(s => typeof s === 'string' ? s : s.title || s.name).filter(Boolean) };
+           certifications: certs.filter(c => c.name), projects, skills: (pick(p, 'skills') || []).map(s => typeof s === 'string' ? s : s.title || s.name).filter(Boolean) };
 }
 
 // ---------- merge ----------
@@ -113,9 +119,9 @@ function mergeCerts(oldList, fresh) { // add/update only, never delete
   for (const c of fresh) {
     if (ignored(overrides.ignoreCertifications, c.name + ' ' + c.issuer)) continue;
     const i = out.findIndex(x => norm(x.name) === norm(c.name));
-    if (i < 0) out.push(c); else if (c.date && out[i].date !== c.date) out[i] = { ...out[i], date: c.date };
+    if (i < 0) { const at = out.findIndex(x => ts(x.date) < ts(c.date)); out.splice(at < 0 ? out.length : at, 0, c); } else if (c.date && out[i].date !== c.date) out[i] = { ...out[i], date: c.date };
   }
-  return out.sort((a, b) => ts(b.date) - ts(a.date));
+  return out;
 }
 const ts = d => { const m = String(d).match(/([A-Za-z]{3})?\s*(\d{4})/); return m ? +m[2] * 12 + Math.max(0, MONTHS.indexOf(m[1])) : 0; };
 
@@ -153,11 +159,21 @@ diffList('Experience', profile.experience, next.experience, e => `${e.title} @ $
 diffList('Education', profile.education, next.education, e => `${e.title} @ ${e.org}`);
 diffList('Certification', profile.certifications, next.certifications, c => c.name);
 
+// Report-only: things on LinkedIn that are curated by hand on the site. Never written to the site.
+const notes = [];
 const known = new Set(Object.values(read('data/skills-known.json')).flat().map(norm));
 const newSkills = fresh.skills.filter(s => !known.has(norm(s)));
-if (newSkills.length) lines.push(`\n_Skills on LinkedIn not shown on the site (skills are curated by hand in index.html):_ ${newSkills.join(', ')}`);
+if (newSkills.length) notes.push(`- **Skills** on LinkedIn but not on the site: ${newSkills.join(', ')}`);
 
-if (process.env.SUMMARY_FILE) fs.writeFileSync(process.env.SUMMARY_FILE, lines.length ? lines.join('\n') + '\n' : 'No changes.\n');
-if (JSON.stringify(next) === JSON.stringify(profile)) { console.log('No changes from LinkedIn.'); process.exit(0); }
+const knownProjects = read('data/projects-known.json').projects.map(norm);
+const matches = n => knownProjects.some(k => n.includes(k) || k.includes(n));
+const newProjects = fresh.projects.filter(x => !matches(norm(x.name)) && !ignored(overrides.ignoreProjects, x.name));
+for (const x of newProjects)
+  notes.push(`- **Project** "${x.name}"${x.date ? ` (${x.date})` : ''}${x.url ? ` ${x.url}` : ''} is on LinkedIn but has no card on the site. Add one in index.html and list it in data/projects-known.json.`);
+
+const out = [...lines, ...(notes.length ? ['', '### On LinkedIn but not on the site (report only, nothing was changed)', ...notes] : [])];
+if (process.env.SUMMARY_FILE) fs.writeFileSync(process.env.SUMMARY_FILE, out.length ? out.join('\n') + '\n' : 'No changes.\n');
+if (process.env.NOTES_FILE) fs.writeFileSync(process.env.NOTES_FILE, notes.join('\n') + (notes.length ? '\n' : ''));
+if (JSON.stringify(next) === JSON.stringify(profile)) { console.log('No changes from LinkedIn.' + (notes.length ? '\n' + notes.join('\n') : '')); process.exit(0); }
 fs.writeFileSync(new URL('data/profile.json', root), JSON.stringify(next, null, 2) + '\n');
-console.log('profile.json updated:\n' + lines.join('\n'));
+console.log('profile.json updated:\n' + out.join('\n'));
