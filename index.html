@@ -10,9 +10,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="style.css?v=5">
   <script type="importmap">
-  { "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }
+  { "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  } }
   </script>
 </head>
 <body>
@@ -142,7 +145,7 @@
           <a class="plink" href="https://github.com/Ryan-wong123/AI-object-detection-research" target="_blank" rel="noopener">View on GitHub ↗</a>
         </article>
         <article class="card glass">
-          <a class="thumb" href="https://play.google.com/store/apps/details?id=com.Realmns.TankIO" target="_blank" rel="noopener"><img class="bgart" src="images/tank-io.svg" alt="" loading="lazy"><img class="appicon" src="images/tank-io-icon.png" alt="Tank IO app icon" loading="lazy"></a>
+          <a class="thumb" href="https://play.google.com/store/apps/details?id=com.Realmns.TankIO" target="_blank" rel="noopener"><img class="bgart" src="images/tank-io.svg" alt="" loading="lazy"><canvas class="preview3d" data-model="tank" aria-hidden="true"></canvas><img class="appicon" src="images/tank-io-icon.png" alt="Tank IO app icon" loading="lazy"></a>
           <span class="date">Jan 2024 – Jul 2024</span>
           <h4>Tank IO <em>Mobile Game</em></h4>
           <p>Unity tank combat game with destructible environments and random power-ups giving buffs, debuffs and new weapons. Enemy tank AI is driven by behavior trees for dynamic combat decisions.</p>
@@ -150,7 +153,7 @@
           <a class="plink" href="https://play.google.com/store/apps/details?id=com.Realmns.TankIO" target="_blank" rel="noopener">View on Google Play ↗</a>
         </article>
         <article class="card glass">
-          <a class="thumb" href="https://github.com/Ryan-wong123/Robot-fighter" target="_blank" rel="noopener"><img src="images/robot-fighter.svg" alt="Robot Fighter cover" loading="lazy"></a>
+          <a class="thumb" href="https://github.com/Ryan-wong123/Robot-fighter" target="_blank" rel="noopener"><img src="images/robot-fighter.svg" alt="Robot Fighter cover" loading="lazy"><canvas class="preview3d" data-model="robot" aria-hidden="true"></canvas></a>
                     <h4>Robot Fighter <em>Unity</em></h4>
           <p>A robot version of Street Fighter built in Unity.</p>
           <div class="tags"><span>Unity</span><span>C#</span></div>
@@ -185,6 +188,7 @@
 
     <section id="skills" class="reveal">
       <h3><small>04</small> Skills</h3>
+      <div class="globe" id="globe" aria-hidden="true"></div>
       <div class="skillgrid">
         <div class="glass"><h4>Languages</h4><div class="tags big"><span>C#</span><span>Python</span><span>Java</span><span>JavaScript</span><span>SQL</span><span>HTML/CSS</span></div></div>
         <div class="glass"><h4>Web &amp; Mobile</h4><div class="tags big"><span>React</span><span>React Native</span><span>Flask</span><span>Android</span><span>Docker</span></div></div>
@@ -247,7 +251,8 @@
   </main>
 
   <footer>© <span id="year"></span> Ryan Wong · Singapore</footer>
-  <script src="script.js?v=4"></script>
-  <script type="module" src="scene.js?v=1"></script>
+  <script src="script.js?v=5"></script>
+  <script type="module" src="scene.js?v=7"></script>
+  <script type="module" src="previews.js?v=4"></script>
 </body>
 </html>

@@ -105,5 +105,11 @@ footer{text-align:center;color:var(--muted);padding:4rem 0 2rem;font-size:.85rem
 
 .thumb{position:relative;display:grid;place-items:center;overflow:hidden}
 .thumb .bgart{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(6px) brightness(.8);transform:scale(1.15)}
-.thumb .appicon{position:relative;width:auto;height:66%;max-width:60%;aspect-ratio:1/1;border-radius:22%;object-fit:cover;box-shadow:0 14px 36px rgba(0,0,0,.45);transition:transform .4s}
-.card:hover .thumb .appicon{transform:scale(1.08)}
+.thumb .appicon{position:relative;width:auto;height:66%;max-width:60%;aspect-ratio:1/1;border-radius:22%;object-fit:cover;box-shadow:0 14px 36px rgba(0,0,0,.45);transition:transform .4s;transform:translate(calc(var(--px,0)*16px),calc(var(--py,0)*16px))}
+.card:hover .thumb .appicon{transform:translate(calc(var(--px,0)*16px),calc(var(--py,0)*16px)) scale(1.08)}
+.thumb .preview3d{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+
+/* skills globe */
+.globe{position:relative;height:360px;max-width:420px;margin:0 auto 2.5rem;cursor:grab;touch-action:none;user-select:none}
+.globe:active{cursor:grabbing}
+.globe span{position:absolute;left:50%;top:50%;white-space:nowrap;font-size:.85rem;font-weight:600;padding:.3rem .85rem;border-radius:99px;color:var(--fg);background:var(--glass-hi);border:1px solid color-mix(in srgb,var(--b) 35%,transparent);box-shadow:0 0 18px -6px var(--b);will-change:transform,opacity}
