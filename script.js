@@ -40,6 +40,20 @@ const io = new IntersectionObserver(es => es.forEach(e => {
 document.querySelectorAll('.reveal, .hero').forEach(x => io.observe(x));
 document.querySelector('.hero').classList.add('in');
 
+// 3D tilt on project cards (mouse only, skipped for reduced motion)
+const finePointer = matchMedia('(pointer: fine)').matches;
+if (finePointer && !still) {
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('pointermove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `perspective(900px) translateY(-6px) rotateX(${-y * 8}deg) rotateY(${x * 10}deg)`;
+    });
+    card.addEventListener('pointerleave', () => { card.style.transform = ''; });
+  });
+}
+
 // scroll progress + active link
 const bar = document.getElementById('progress');
 const links = [...document.querySelectorAll('#links a')];
