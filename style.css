@@ -21,6 +21,7 @@ a{color:inherit;text-decoration:none}
 .bg i:nth-child(3){background:var(--c);top:40%;left:45%;width:30vmax;height:30vmax;opacity:.15;animation-delay:-15s}
 :root[data-theme="light"] .bg i{opacity:.16}
 @keyframes float{50%{transform:translate(6vw,-5vh) scale(1.15)}}
+#scene{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
 .progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--grad);z-index:30}
 
 /* nav */
