@@ -1,0 +1,7 @@
+{
+  "Languages": ["C#", "Python", "Java", "JavaScript", "SQL", "HTML/CSS"],
+  "Web & Mobile": ["React", "React Native", "Flask", "Android", "Docker"],
+  "Game & 3D": ["Unity", "Photon", "Maya", "Substance Painter", "Photoshop"],
+  "AI & Embedded": ["Object Detection", "OpenCV", "IoT", "Raspberry Pi", "Embedded Systems"],
+  "Tools & Automation": ["Git", "GitLab", "Workato", "Excel", "Bugzilla"]
+}
