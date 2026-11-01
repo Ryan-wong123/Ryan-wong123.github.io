@@ -144,9 +144,6 @@ body.filtering .glass:not(.hl){opacity:.3}
 .biz-top span{opacity:.85;font-size:.9rem}
 .biz-bottom{display:grid;gap:.1rem;font:500 .8rem "JetBrains Mono",monospace;opacity:.92}
 
-.game{margin:0 auto 1.4rem;max-width:520px}
-#breakout{display:block;width:100%;height:auto;border-radius:14px;border:1px solid var(--line);background:rgba(0,0,0,.18);touch-action:none;cursor:pointer}
-.game-hint{font-size:.8rem;color:var(--muted);margin-top:.5rem}
 
 .toast{position:fixed;left:50%;bottom:24px;z-index:70;transform:translate(-50%,140%);padding:.7rem 1.2rem;border-radius:99px;background:var(--glass-hi);border:1px solid var(--line);backdrop-filter:blur(12px);font-weight:600;transition:transform .4s cubic-bezier(.2,.8,.2,1);pointer-events:none}
 .toast.show{transform:translate(-50%,0)}
