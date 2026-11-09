@@ -6,10 +6,10 @@
     "I am particularly interested in opportunities involving <strong>software engineering, full-stack development, AI, and automation</strong>."
   ],
   "experience": [
-    { "title": "Research Assistant", "org": "Singapore Institute of Technology", "start": "Oct 2026", "end": "Present",
+    { "title": "Research Assistant", "org": "Singapore Institute of Technology", "start": "Oct 2026", "end": "Oct 2026",
       "description": "Leading an independent research project under Prof Pai Chet on whether AI-generated objects inserted into real photographs can be detected object by object. The work targets a <strong>CVPR 2027</strong> submission.",
       "tags": ["AI", "Object Detection"] },
-    { "title": "Teaching Assistant", "org": "Singapore Institute of Technology", "start": "Sep 2026", "end": "Oct 2026",
+    { "title": "Teaching Assistant", "org": "Singapore Institute of Technology", "start": "Sep 2026", "end": "Nov 2026",
       "description": "Teaching assistant for the Embedded Systems (IoT) module.",
       "tags": ["Embedded Systems", "IoT", "Raspberry Pi", "Teaching"] },
     { "title": "Freelance Software Engineer", "org": "Self-Employed", "start": "Oct 2019", "end": "Present",

@@ -190,34 +190,3 @@ addEventListener('keydown', e => {
   typed = [...typed, key].slice(-KONAMI.length);
   if (typed.join() === KONAMI.join()) celebrate();
 });
-
-// GitHub contribution graph: last year of public activity from a contributions endpoint
-const graph = $('#graph');
-if (graph) {
-  const user = 'Ryan-wong123';
-  const showFallback = () => {
-    $('#activity-total').textContent = '';
-    $('#graph-fallback').hidden = false;
-    graph.closest('.graph-scroll').hidden = true;
-  };
-  fetch(`https://github-contributions-api.jogruber.de/v4/${user}?y=last`)
-    .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
-    .then(({ total, contributions }) => {
-      // start the first column on a Sunday so weeks line up
-      const pad = new Date(`${contributions[0].date}T00:00:00`).getDay();
-      const cells = [...Array(pad).fill(null), ...contributions];
-      const frag = document.createDocumentFragment();
-      for (const d of cells) {
-        const cell = document.createElement('span');
-        cell.className = d ? 'day' : 'day blank';
-        if (d) {
-          cell.dataset.level = d.level;
-          cell.title = `${d.count} contribution${d.count === 1 ? '' : 's'} on ${d.date}`;
-        }
-        frag.appendChild(cell);
-      }
-      graph.replaceChildren(frag);
-      $('#activity-total').textContent = `${total.lastYear.toLocaleString()} contributions in the last year`;
-    })
-    .catch(showFallback);
-}
