@@ -1,5 +1,5 @@
 :root{
-  --bg:#07090f;--fg:#eef1f8;--muted:#98a2b8;--line:rgba(255,255,255,.09);
+  --bg:#07090f;--fg:#fff;--muted:#fff;--line:rgba(255,255,255,.09);
   --glass:rgba(255,255,255,.04);--glass-hi:rgba(255,255,255,.07);
   --a:#7c5cff;--b:#22d3ee;--c:#ff5ca8;--grad:linear-gradient(120deg,var(--a),var(--b));
 }
