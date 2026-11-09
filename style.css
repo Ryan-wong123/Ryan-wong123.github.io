@@ -100,6 +100,7 @@ footer{text-align:center;color:var(--muted);padding:4rem 0 2rem;font-size:.85rem
 .card .tags{margin-bottom:1rem}
 .plink{margin-top:auto;font-weight:600;font-size:.9rem;color:var(--b)}
 .plink:hover{text-decoration:underline}
+.plinks{margin-top:auto;display:flex;flex-wrap:wrap;gap:.4rem 1.2rem}.plinks .plink{margin-top:0}
 
 .thumb{position:relative;display:grid;place-items:center;overflow:hidden}
 .thumb .bgart{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(6px) brightness(.8);transform:scale(1.15)}
@@ -122,7 +123,7 @@ footer{text-align:center;color:var(--muted);padding:4rem 0 2rem;font-size:.85rem
 .detail-sheet{position:relative;width:min(640px,100%);max-height:88vh;overflow:auto;border-radius:22px;background:var(--bg);border:1px solid var(--line);transform-origin:0 0;box-shadow:0 30px 80px -20px rgba(0,0,0,.6)}
 .detail-card{display:flex;flex-direction:column;margin:0;border-radius:22px;padding:1.5rem;background:var(--glass-hi);transition:none}
 .detail-card:hover{transform:none}
-.detail-card .plink{margin-top:1rem}
+.detail-card .plink{margin-top:1rem}.detail-card .plinks{margin-top:1rem}
 .detail-close{position:absolute;top:12px;right:12px;z-index:3;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--glass-hi);color:var(--fg);cursor:pointer;font-size:1rem}
 
 .timeline{--fill:0}
