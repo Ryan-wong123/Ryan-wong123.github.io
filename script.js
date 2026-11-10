@@ -126,7 +126,7 @@ if (globe) {
 
 // scroll progress + active link
 const bar = document.getElementById('progress');
-const links = [...document.querySelectorAll('#links a')];
+const links = [...document.querySelectorAll('#links a[href^="#"]')];
 const secs = links.map(a => document.querySelector(a.getAttribute('href')));
 addEventListener('scroll', () => {
   const h = document.documentElement;
