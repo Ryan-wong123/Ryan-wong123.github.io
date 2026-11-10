@@ -107,6 +107,22 @@ footer{text-align:center;color:var(--muted);padding:4rem 0 2rem;font-size:.85rem
 .thumb .appicon{position:relative;width:auto;height:66%;max-width:60%;aspect-ratio:1/1;border-radius:22%;object-fit:cover;box-shadow:0 14px 36px rgba(0,0,0,.45);transition:transform .4s;transform:translate(calc(var(--px,0)*16px),calc(var(--py,0)*16px))}
 .card:hover .thumb .appicon{transform:translate(calc(var(--px,0)*16px),calc(var(--py,0)*16px)) scale(1.08)}
 .thumb .preview3d{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+/* screenshot carousel */
+.thumb.carousel{display:block;position:relative}
+.carousel .slides{display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
+.carousel .slides::-webkit-scrollbar{display:none}
+.carousel .slide{position:relative;flex:0 0 100%;height:100%;display:block;scroll-snap-align:start}
+.card:hover .carousel .slide img{transform:none}
+.carousel .cap{position:absolute;left:10px;bottom:10px;font-size:.72rem;font-weight:600;line-height:1;padding:.4rem .7rem;border-radius:99px;color:#fff;background:rgba(7,9,15,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.car-btn{position:absolute;top:50%;transform:translateY(-50%);width:30px;height:30px;padding:0;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(7,9,15,.62);color:#fff;font-size:1.2rem;line-height:1;display:grid;place-items:center;cursor:pointer;opacity:0;transition:opacity .2s,background .2s}
+.car-btn.prev{left:8px}.car-btn.next{right:8px}
+.carousel:hover .car-btn,.car-btn:focus-visible{opacity:1}
+.car-btn:hover{background:rgba(7,9,15,.85)}
+@media (hover:none){.car-btn{opacity:1}}
+.dots{position:absolute;right:10px;bottom:10px;display:flex;align-items:center;gap:5px;padding:.4rem .55rem;border-radius:99px;background:rgba(7,9,15,.62)}
+.car-dot{width:7px;height:7px;padding:0;border:0;border-radius:99px;background:rgba(255,255,255,.5);cursor:pointer;transition:width .25s,background .25s}
+.car-dot.on{width:18px;background:#fff}
+.detail-card .thumb.carousel{margin:0 0 1rem;border-radius:16px}
 
 /* interactive layer */
 .glass{position:relative;transition:transform .25s,border-color .25s,background .25s,opacity .3s}
