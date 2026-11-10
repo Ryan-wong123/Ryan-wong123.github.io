@@ -46,6 +46,7 @@ function openDetail(card) {
   copy.classList.add('detail-card');
   copy.querySelectorAll('canvas').forEach(c => c.remove());
   sheetBody.replaceChildren(copy);
+  $$('.carousel', copy).forEach(syncDots);
   detail.hidden = false;
   if (!calm) {
     const from = card.getBoundingClientRect();
@@ -76,7 +77,7 @@ function closeDetail() {
 
 $$('#projects .card').forEach(card => {
   card.tabIndex = 0;
-  card.addEventListener('click', e => { if (!e.target.closest('a')) openDetail(card); });
+  card.addEventListener('click', e => { if (!e.target.closest('a, button')) openDetail(card); });
   card.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target === card) openDetail(card); });
 });
 $('.detail-close', detail).addEventListener('click', closeDetail);
@@ -190,3 +191,47 @@ addEventListener('keydown', e => {
   typed = [...typed, key].slice(-KONAMI.length);
   if (typed.join() === KONAMI.join()) celebrate();
 });
+
+// screenshot carousels: arrows and dots (delegated, so the detail-sheet copy works too), swipe via scroll-snap
+function carouselIndex(car) {
+  const s = $('.slides', car);
+  return Math.round(s.scrollLeft / s.clientWidth);
+}
+function syncDots(car) {
+  const i = carouselIndex(car);
+  $$('.car-dot', car).forEach((d, n) => d.classList.toggle('on', n === i));
+}
+function goTo(car, i) {
+  const s = $('.slides', car);
+  const n = s.children.length;
+  s.scrollTo({ left: (((i % n) + n) % n) * s.clientWidth, behavior: calm ? 'auto' : 'smooth' });
+}
+document.addEventListener('click', e => {
+  const btn = e.target.closest('.car-btn, .car-dot');
+  if (!btn) return;
+  const car = btn.closest('.carousel');
+  if (btn.classList.contains('car-dot')) goTo(car, $$('.car-dot', car).indexOf(btn));
+  else goTo(car, carouselIndex(car) + (btn.classList.contains('next') ? 1 : -1));
+});
+document.addEventListener('scroll', e => {
+  if (e.target.classList && e.target.classList.contains('slides')) syncDots(e.target.closest('.carousel'));
+}, true);
+if (!calm) {
+  // advance slowly while a card is on screen and not being used
+  const visible = new Set();
+  const io = new IntersectionObserver(entries => {
+    for (const en of entries) (en.isIntersecting ? visible.add(en.target) : visible.delete(en.target));
+  }, { threshold: 0.5 });
+  $$('#projects .carousel').forEach((car, n) => {
+    io.observe(car);
+    let paused = false;
+    const card = car.closest('.card');
+    card.addEventListener('pointerenter', () => { paused = true; });
+    card.addEventListener('pointerleave', () => { paused = false; });
+    card.addEventListener('focusin', () => { paused = true; });
+    card.addEventListener('focusout', () => { paused = false; });
+    setTimeout(() => setInterval(() => {
+      if (!paused && !document.hidden && detail.hidden && visible.has(car)) goTo(car, carouselIndex(car) + 1);
+    }, 4500), 1500 + n * 700);
+  });
+}
