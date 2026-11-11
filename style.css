@@ -88,7 +88,12 @@ footer{text-align:center;color:var(--muted);padding:4rem 0 2rem;font-size:.85rem
 .reveal.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
 @media(max-width:760px){
-  #links a:not(.pill){display:none}
+  .nav{gap:.5rem;padding:.5rem .6rem .5rem 1rem}
+  .logo{flex:none;font-size:.95rem}
+  #links{flex:1;min-width:0;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  #links::-webkit-scrollbar{display:none}
+  #links a{flex:none;padding:.3rem .6rem;font-size:.82rem;white-space:nowrap}
+  #theme{flex:none;width:30px;height:30px}
   .about{grid-template-columns:1fr}
   .hero{padding-top:4rem}
 }
